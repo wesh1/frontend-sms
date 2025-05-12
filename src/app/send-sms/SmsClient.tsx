@@ -1,12 +1,16 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'
 
 export default function SmsClient() {
+  const router = useRouter()
+
   const [phone, setPhoneValue] = useState('')
   const [message, setMessageValue] = useState('')
   const [countryCode, setCountryCode] = useState('')
   const [infoMessage, setInfoMessage] = useState('')
+  const [error, setError] = useState('')
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCountryCode(event.target.value)
@@ -14,6 +18,35 @@ export default function SmsClient() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Clear form
+    setPhoneValue('')
+    setMessageValue('')
+    setCountryCode('')
+    setError('')
+    
+    const res = await fetch('/api/message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ countryCode, phone, message }),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+
+      console.log(data[0])
+
+      // Show success message
+      setInfoMessage(`Message was sent correctly`)
+
+      // Hide message after 10 seconds
+      setTimeout(() => setInfoMessage(''), 10000)
+      
+      router.push('/send-sms');
+    } else {
+      const data = await res.json();
+      setError(data.message);
+    }
 
   }
 
