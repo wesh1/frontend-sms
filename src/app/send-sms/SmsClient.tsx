@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
+import LogoutButton from '../components/LogoutButton'
 
 export default function SmsClient() {
   const router = useRouter()
@@ -52,7 +53,7 @@ export default function SmsClient() {
 
   return (
     <div className="relative min-h-screen bg-gray-100 p-8">
-      
+      <LogoutButton />
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <form
           onSubmit={handleSubmit}
