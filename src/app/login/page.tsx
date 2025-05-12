@@ -19,10 +19,13 @@ export default function LoginPage() {
     });
 
     if (res.ok) {
-       router.push('/send-sms');
+      // If the call to the API was correct, redirect to /send-sms
+      router.push('/send-sms');
     } else {
       const data = await res.json();
-      setError(data.message);
+
+      // Print out the error if an error has ocurred
+      setError(data.error);
     }
   };
 
@@ -30,12 +33,6 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
         <h2 className="text-2xl font-bold text-center mb-6">Login</h2>
-
-        {error && (
-          <div className="mb-4 text-red-600 text-sm text-center">
-            {error}
-          </div>
-        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -66,6 +63,12 @@ export default function LoginPage() {
           >
             Login
           </button>
+          
+          {error && (
+            <div className="mb-4 text-red-600 text-sm text-center">
+              {error}
+            </div>
+          )}
         </form>
       </div>
     </div>
