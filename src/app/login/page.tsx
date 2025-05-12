@@ -19,8 +19,7 @@ export default function LoginPage() {
     });
 
     if (res.ok) {
-      //router.push('/send-message');
-       router.push('/dashboard');
+       router.push('/send-sms');
     } else {
       const data = await res.json();
       setError(data.message);
@@ -71,4 +70,5 @@ export default function LoginPage() {
       </div>
     </div>
   );
+  
 }
