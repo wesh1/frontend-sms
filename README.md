@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Explanation
 
-## Getting Started
+There are 2 main pages
 
-First, run the development server:
+## Login
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This page will show a form to put the credentials of the user.
+
+There are 3 users already created for this demo.
+
+| Email  | Password |
+| ------------- | ------------- |
+| william@guatemala502.com|MyPass1234  |
+| carlos@guatemala502.com |Walk1234  |
+| jessica@exguatemala502ample.com|Sing1234  |
+
+When pressing the Login button, this will ask a JWT to the back-end, if the credentials are ok, it will receive an JWT as a response and it will redirect to the /send-sms page.
+
+## Send SMS page
+
+This page will be show only if the user has been authenticated and the JWT hasn't expired.
+
+It has a form with 3 field: country code (Guatemala and El Salvador for this demo), phone number and message to be send. When pressing the button Submit, it will call the back-end, the back-end will validate the data and if everything is correct it will save the message in the database and show a message that it was send successfully. It also will show the message send in the console.
+
+The logout button will delete the session and will redirect to the login page.
+
+## How to run
+
+After running the back-end, run the front-ent like following
+
+Install the dependencies
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Run the project
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000/login](http://localhost:3000/login) with your browser
