@@ -53,40 +53,49 @@ export default function SmsClient() {
 
   return (
     <div className="relative min-h-screen bg-gray-100 p-8">
+      
       <LogoutButton />
+
       <div className="flex items-center justify-center min-h-screen bg-gray-100">
         <form
           onSubmit={handleSubmit}
           className="bg-white p-6 rounded-2xl shadow-md w-full max-w-sm space-y-4">
         
-          <h2 className="text-xl font-semibold text-center">Send SMS</h2>
+          <h2 className="text-xl font-semibold text-center text-gray-700">Send SMS</h2>
 
-          <select
-          id="my-select"
-          value={countryCode}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+          <label className="block text-sm font-medium text-gray-700">Country code</label>
+
+          <select id="my-select"
+            required
+            value={countryCode}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-xl text-gray-900 font-medium bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-          <option value="">-- Select --</option>
-          <option value="+502">+502</option>
-          <option value="+503">+503</option>
+            <option value="">-- Select --</option>
+            <option value="+502">+502 (Guatemala)</option>
+            <option value="+503">+503 (El Salvador)</option>
           </select>
 
+          <label className="block text-sm font-medium text-gray-700">Phone</label>
+
           <input
+            pattern="^\d{8}$"
+            title="Please enter exactly 8 digits"
             type="text"
             value={phone}
             onChange={(e) => setPhoneValue(e.target.value)}
             placeholder="00000000"
-            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-xl text-gray-900 font-medium bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
 
-          <input
-            type="text"
+          <label className="block text-sm font-medium text-gray-700">Message</label>
+
+          <textarea
             value={message}
             onChange={(e) => setMessageValue(e.target.value)}
             placeholder="Enter something..."
-            className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full h-20 px-4 py-2 border border-gray-300 rounded-xl text-gray-900 font-medium bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
 
